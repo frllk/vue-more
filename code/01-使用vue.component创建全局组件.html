@@ -6,7 +6,46 @@
   <title>Document</title>
 </head>
 <body>
+  <div id="app">
+    <my-button></my-button>
+    <hr>
+    <com1></com1>
+    <hr>
+    <com2>
+      <div slot="title">构建目标</div>
+      <div>
+        当你运行 vue-cli-service build 时，你可以通过 --target 选项指定不同的构建目标。它允许你将相同的源代码根据不同的用例生成不同的构建。
+      </div>
+    </com2>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  
+  <script>
+    Vue.component('MyButton', {
+      template: `
+        <div><button>全局组件-按钮</button></div>
+      `
+    })
+    const vm = new Vue({
+      el: '#app',
+      data () {
+        return {}
+      },
+      components: {
+        com1: {
+          template: `
+            <div>com1组件-局部组件</div>
+          `
+        },
+        com2: {
+          template:  `
+            <div>
+              <slot name="title"></slot>
+              <slot>默认插槽---不传入内容时默认显示</slot>
+            </div>
+          `
+        }
+      }
+    })
+  </script>
 </body>
 </html>

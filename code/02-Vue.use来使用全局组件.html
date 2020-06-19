@@ -6,15 +6,25 @@
   <title>Document</title>
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <my-button></my-button>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
-    var obj = {
-      install (abc) {
-        console.log('obj.install', abc)
+    // Vue.use(对象)：注册插件的
+    // 对象中必须要有一个方法叫install，当你Vue.use(对象)，会执行这个方法，
+    // 同时会把Vue传给这个方法
+    var MyButton = {
+      install (Vue) {
+        Vue.component('MyButton', {
+          template: `
+          <div><button>全局组件-按钮</button></div>
+          `
+        })
       }
     }
-    Vue.use(obj)
+    // 以插件格式来注册一个全局组件MyButton
+    Vue.use(MyButton)
     new Vue({
       el: '#app'
     })

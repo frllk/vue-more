@@ -6,15 +6,28 @@
   <title>Document</title>
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <my-button></my-button>
+    <br>
+    <my-button></my-button>
+    <br>
+    <my-headline></my-headline>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
-    var obj = {
-      install (abc) {
-        console.log('obj.install', abc)
+    const UI = {
+      MyButton: {
+        template: `<div><button>全局组件-按钮</button></div>`
+      },
+      MyHeadline: {
+        template:  `<div>全局组件-MyHeadline</div>`
+      },
+      install (Vue) {
+        Vue.component('MyButton', UI.MyButton)
+        Vue.component('MyHeadline', UI.MyHeadline)
       }
     }
-    Vue.use(obj)
+    Vue.use(UI)
     new Vue({
       el: '#app'
     })
