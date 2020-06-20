@@ -1,7 +1,12 @@
 <template>
-  <div class="slider">
+  <div class="slider"
+  @mouseenter="hMouseEnter"
+  @mouseleave="hMouseLeave"
+  >
     <div class="slider-content">
-      <div v-for="(item,idx) in list" :key="idx" class="slider-item">
+      <div v-for="(item,idx) in list"
+      :key="idx"
+      class="slider-item">
         <img v-show="idx===currIndex" :src="item.url" :alt="item.alt" />
       </div>
     </div>
@@ -13,8 +18,7 @@
       <li v-for="(item,idx) in list"
       :key="idx"
       :class="{current: idx===currIndex}"
-      @mouseenter="hMouseEnter"
-      @mouseleave="hMouseLeave"
+      @mouseenter="currIndex=idx"
       ></li>
 
       <!-- <li class="current"></li>
