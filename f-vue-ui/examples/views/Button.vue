@@ -13,6 +13,9 @@
     <my-button color="blue" size="massive">超大按钮</my-button>
     <br>
     <br>
+    <my-button color="blue" size="massive1">超大按钮</my-button>
+    <br>
+    <br>
     <my-headline></my-headline>
   </div>
 </template>

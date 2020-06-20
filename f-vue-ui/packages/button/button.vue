@@ -15,7 +15,19 @@ export default {
   props: {
     size: {
       type: String,
-      required: false
+      required: false,
+      default: 'small',
+      // validator 是对prop中接收的值进行校验。
+      // 如果返回true，则表示通过校验，如果返回false，就给出错误提示
+      validator (val) {
+        // semantic-ui中支持的通过关键字设置大小是有限的。
+        // 当用户传入一个不在支持范围内的值，就给一个错误的提示
+        // mini tiny small medium large big huge massive
+        // 如果val是上述关键字之一，返回true，否则 false
+        console.log(val)
+        const types = ['mini', 'tiny', 'small', 'medium', 'large', 'big', 'huge', 'massive']
+        return types.includes(val)
+      }
     },
     color: {
       type: String,
