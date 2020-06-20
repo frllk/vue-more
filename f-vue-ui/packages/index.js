@@ -4,6 +4,7 @@
 import Button from './button/button.vue'
 import MyHeadline from './headline/headline.vue'
 import MyDivider from './divider/divider.vue'
+import MySlider from './slider/slider.vue'
 import 'semantic-ui-css/semantic.css'
 
 export default {
@@ -13,5 +14,6 @@ export default {
     Vue.component(Button.name, Button)
     Vue.component(MyHeadline.name, MyHeadline)
     Vue.component(MyDivider.name, MyDivider)
+    Vue.component(MySlider.name, MySlider)
   }
 }

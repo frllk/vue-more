@@ -22,6 +22,11 @@ const routes = [
     path: '/divider',
     name: 'Divider',
     component: () => import('../views/DividerTest.vue')
+  },
+  {
+    path: '/slider',
+    name: 'Slider',
+    component: () => import('../views/SliderTest.vue')
   }
 ]
 

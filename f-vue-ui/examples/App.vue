@@ -3,7 +3,8 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/button">按钮</router-link> |
-      <router-link to="/divider">分隔条</router-link>
+      <router-link to="/divider">分隔条</router-link> |
+      <router-link to="/slider">轮播图</router-link>
     </div>
     <router-view/>
   </div>
