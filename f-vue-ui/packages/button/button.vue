@@ -2,7 +2,7 @@
   <!-- 思路：
   由于semantic-ui中按钮的大小是通过额外补充一个类，mini...massive来实现的，
   所以，在这里可以通过给外层容器动态绑定class -->
-  <div class="ui button" :class="cClass">
+  <div class="ui button" :class="cClass" @click="$emit('click')">
     <!-- 如果传入了animated，则整个视图比较复杂，与不传animated是完全不同的，所以这里直接分两种情况 -->
     <!-- template：只是逻辑上的容器，并不会产生真实的dom -->
     <template v-if="animated">
@@ -56,6 +56,10 @@ export default {
     animated: {
       type: [Boolean, String],
       required: false
+    },
+    loading: {
+      type: Boolean,
+      required: false
     }
   },
   computed: {
@@ -71,6 +75,9 @@ export default {
       }
       if (this.color) {
         classList.push(this.color)
+      }
+      if (this.loading) {
+        classList.push('loading')
       }
       // vue在绑定class时，是支持直接给数组，所以不用join了，直接返回数组就好
       // return classList.join(' ')

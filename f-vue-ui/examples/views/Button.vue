@@ -38,15 +38,33 @@
     <my-button color="red" size="huge">huge red</my-button>
     <br>
     <br>
-    <my-button color="pink" size="massive">massive pink</my-button>
+    <my-button loading color="pink" size="massive">massive pink</my-button>
     <br>
     <br>
-    <my-button color="teal" size="massive">massive teal</my-button>
+    <!-- 这是一个自定义的组件
+    @click相当是监听这个组件内部的click的事件。
+    click事件是一个特殊的事件名：
+      1）如果你加在原生的html标签，它是直接生效的。
+      2）但是，你不能直接加在组件上，除非你自己在组件内部抛出这个事件来。
+    -->
+    <my-button @click="hClick" color="teal" size="massive">massive teal 点我 </my-button>
     <br>
     <br>
     <my-button color="orange1" size="massive1">超大按钮，测试提示error</my-button>
     <br>
     <br>
+    <button @click="hClick">点我</button>
+    <br>
+    <br>
     <my-headline></my-headline>
   </div>
 </template>
+<script>
+export default {
+  methods: {
+    hClick () {
+      alert(1)
+    }
+  }
+}
+</script>
