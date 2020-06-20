@@ -1,7 +1,7 @@
 <template>
   <div class='home'>
     <h3>对轮播图组件的测试</h3>
-    <my-slider style="width:500px; height:400px;"
+    <my-slider style="width:900px; height:500px;"
     :auto="2000"
     :curIndex="curIndex"
     :list="list"
