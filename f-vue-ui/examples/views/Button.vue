@@ -14,16 +14,34 @@
       <div slot="visible">鼠标放上来看看</div>
     </my-button>
     <hr>
-    <my-button color="black"></my-button>
+    <my-button></my-button>
     <br>
     <br>
-    <my-button color="yellow" size="mini">普通按钮</my-button>
+    <my-button color="black" size="mini">mini black</my-button>
     <br>
     <br>
-    <my-button color="green" size="large">按钮XXX</my-button>
+    <my-button color="yellow" size="tiny">tiny yellow</my-button>
     <br>
     <br>
-    <my-button color="blue" size="massive">超大按钮</my-button>
+    <my-button color="green" size="small">small green</my-button>
+    <br>
+    <br>
+    <my-button color="blue" size="medium">medium blue</my-button>
+    <br>
+    <br>
+    <my-button color="orange" size="large">large orange</my-button>
+    <br>
+    <br>
+    <my-button color="purple" size="big">big purple</my-button>
+    <br>
+    <br>
+    <my-button color="red" size="huge">huge red</my-button>
+    <br>
+    <br>
+    <my-button color="pink" size="massive">massive pink</my-button>
+    <br>
+    <br>
+    <my-button color="teal" size="massive">massive teal</my-button>
     <br>
     <br>
     <my-button color="orange1" size="massive1">超大按钮，测试提示error</my-button>
