@@ -1,6 +1,9 @@
 <template>
   <div class=''>
-    <button>公共组件-按钮</button>
+    <div class="ui button">
+      <!-- 默认插槽：如果在使用组件时，传入内容就用传入的，否则显示“按钮” -->
+      <slot>按钮</slot>
+    </div>
   </div>
 </template>
 

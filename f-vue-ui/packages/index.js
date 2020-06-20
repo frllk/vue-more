@@ -3,6 +3,7 @@
  */
 import Button from './button/button.vue'
 import MyHeadline from './headline/headline.vue'
+import 'semantic-ui-css/semantic.css'
 
 export default {
   install (Vue) {
