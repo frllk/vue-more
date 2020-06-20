@@ -1,19 +1,22 @@
 <template>
   <div class="slider">
     <div class="slider-content">
-      <div class="slider-item">
-        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584438531340&di=0c69fbc0d55171aa8a1d2d107c3f7c87&imgtype=0&src=http%3A%2F%2Fimg21.mtime.cn%2Fpi%2F2011%2F01%2F12%2F134106.88324738_1000X1000.jpg" alt />
+      <div v-for="(item,idx) in list" :key="idx" class="slider-item">
+        <img v-show="idx===currIndex" :src="item.url" :alt="item.alt" />
       </div>
     </div>
-    <span class="btn btn_left"></span>
-    <span class="btn btn_right"></span>
+    <span class="btn btn_left" @click="hPrev"></span>
+    <span class="btn btn_right" @click="hNext"></span>
 
-    <div class="txt">标题</div>
+    <div class="txt">{{list[currIndex].alt}}</div>
     <ol class="indirector">
-      <li></li>
+      <li v-for="(item,idx) in list"
+      :key="idx"
+      :class="{current: idx===currIndex}"
+      ></li>
 
-      <li class="current"></li>
-      <li></li>
+      <!-- <li class="current"></li>
+      <li></li> -->
     </ol>
   </div>
 </template>
@@ -22,7 +25,46 @@ export default {
   name: 'MySlider',
   data () {
     return {
-
+      // 由于在子组件内部 ，不允许修改从父组件传入的props，所以这里补充定义一个数据项，从curIdx中获取初始值
+      currIndex: this.curIdx
+    }
+  },
+  // 不用直接去修改父组件中传过的值
+  props: {
+    // 自动播放间隔时长---毫秒数
+    auto: {
+      type: Number,
+      required: false
+    },
+    // 默认显示哪一张图的下标
+    curIdx: {
+      type: Number,
+      required: false,
+      default: 0 // 默认显示下标为0的图
+    },
+    // 轮播列表
+    list: {
+      type: Array,
+      required: true
+    }
+  },
+  methods: {
+    // 点击按钮，本质就是要修改当前项的下标
+    hPrev () {
+      // 上一张
+      // 下标变小
+      this.currIndex--
+      if (this.currIndex === -1) {
+        this.currIndex = this.list.length - 1
+      }
+    },
+    hNext () {
+      // 下一张
+      // 下标变大
+      this.currIndex++
+      if (this.currIndex === this.list.length) {
+        this.currIndex = 0
+      }
     }
   }
 }
@@ -46,6 +88,8 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
 }
 .slider img {
   width: 100%;
