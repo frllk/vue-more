@@ -2,7 +2,7 @@
   <div class='home'>
     <h3>对轮播图组件的测试</h3>
     <my-slider style="width:900px; height:500px;"
-    :auto="2000"
+    :auto="1000"
     :curIdx="curIdx"
     :list="list"
     ></my-slider>

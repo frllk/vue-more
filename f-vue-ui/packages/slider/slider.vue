@@ -13,6 +13,8 @@
       <li v-for="(item,idx) in list"
       :key="idx"
       :class="{current: idx===currIndex}"
+      @mouseenter="hMouseEnter"
+      @mouseleave="hMouseLeave"
       ></li>
 
       <!-- <li class="current"></li>
@@ -26,7 +28,8 @@ export default {
   data () {
     return {
       // 由于在子组件内部 ，不允许修改从父组件传入的props，所以这里补充定义一个数据项，从curIdx中获取初始值
-      currIndex: this.curIdx
+      currIndex: this.curIdx,
+      timer: null // 保存定时器
     }
   },
   // 不用直接去修改父组件中传过的值
@@ -49,6 +52,18 @@ export default {
     }
   },
   methods: {
+    // 鼠标离开轮播图
+    hMouseLeave () {
+      // 重启定时器
+      this.play()
+    },
+    // 鼠标进入轮播图
+    hMouseEnter () {
+      // 关闭定时器
+      if (this.timer) {
+        clearInterval(this.timer)
+      }
+    },
     // 点击按钮，本质就是要修改当前项的下标
     hPrev () {
       // 上一张
@@ -65,16 +80,19 @@ export default {
       if (this.currIndex === this.list.length) {
         this.currIndex = 0
       }
+    },
+    play () {
+      if (this.auto) {
+        this.timer = setInterval(() => {
+          this.hNext()
+        }, this.auto)
+      }
     }
   },
   created () {
     // 如果用户设置auto的值，则表示开启自动播放功能
     // 所谓的自动播放，就是每隔auto对应的值，就去点击一次：播放下一张
-    if (this.auto) {
-      setInterval(() => {
-        this.hNext()
-      }, this.auto)
-    }
+    this.play()
   }
 }
 </script>
@@ -163,6 +181,7 @@ export default {
   text-indent: 1em;
   line-height: 40px;
   background-color: rgba(0, 0, 0, 0.5);
+  /* background: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,1)); */
   text-align: left;
   bottom: 0;
   left: 0;
@@ -170,7 +189,7 @@ export default {
   color: #fff;
 }
 .slider .indirector {
-  bottom: 10px;
+  bottom: -5px;
   right: 1em;
 }
 .slider .indirector li {
