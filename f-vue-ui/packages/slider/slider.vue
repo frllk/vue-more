@@ -116,6 +116,7 @@ export default {
   margin: 0 auto;
   border: 1px solid #ccc;
   position: relative;
+  cursor: pointer;
 }
 .slider .slider-content {
   overflow: hidden;
@@ -199,8 +200,9 @@ export default {
   color: #fff;
 }
 .slider .indirector {
-  bottom: -5px;
+  bottom: 10px;
   right: 1em;
+  margin: 0;
 }
 .slider .indirector li {
   display: inline-block;
