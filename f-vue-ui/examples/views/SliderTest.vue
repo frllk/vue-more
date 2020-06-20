@@ -6,6 +6,11 @@
     :curIdx="curIdx"
     :list="list"
     ></my-slider>
+    <my-divider></my-divider>
+    <my-slider style="width:500px; height:300px;"
+    :curIdx="curIdx"
+    :list="list"
+    ></my-slider>
   </div>
 </template>
 

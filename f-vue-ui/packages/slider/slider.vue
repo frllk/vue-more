@@ -66,6 +66,15 @@ export default {
         this.currIndex = 0
       }
     }
+  },
+  created () {
+    // 如果用户设置auto的值，则表示开启自动播放功能
+    // 所谓的自动播放，就是每隔auto对应的值，就去点击一次：播放下一张
+    if (this.auto) {
+      setInterval(() => {
+        this.hNext()
+      }, this.auto)
+    }
   }
 }
 </script>
