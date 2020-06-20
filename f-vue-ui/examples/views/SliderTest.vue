@@ -5,6 +5,8 @@
     :auto="1000"
     :curIdx="curIdx"
     :list="list"
+    @click="hClick"
+    @slider="hSlider"
     ></my-slider>
     <my-divider></my-divider>
     <my-slider style="width:500px; height:300px;"
@@ -30,8 +32,15 @@ export default {
         { url: 'http://pic5.997788.com/pic_search/00/17/34/94/se17349411.jpg', alt: '7.英雄本色' }
       ]
     }
+  },
+  methods: {
+    hClick (currIndex) {
+      console.log('click事件，当前索引是', currIndex)
+    },
+    hSlider (val) {
+      console.log('slider事件，当前索引是', val)
+    }
   }
 }
 </script>
-
 <style scoped lang='less'></style>

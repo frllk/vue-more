@@ -1,5 +1,6 @@
 <template>
   <div class="slider"
+  @click="$emit('click', currIndex)"
   @mouseenter="hMouseEnter"
   @mouseleave="hMouseLeave"
   >
@@ -97,6 +98,11 @@ export default {
     // 如果用户设置auto的值，则表示开启自动播放功能
     // 所谓的自动播放，就是每隔auto对应的值，就去点击一次：播放下一张
     this.play()
+  },
+  watch: {
+    currIndex () {
+      this.$emit('slider', this.currIndex)
+    }
   }
 }
 </script>
