@@ -10,7 +10,7 @@ Vue.use(UI)
 console.log(UI)
 
 Vue.config.productionTip = false
-
+console.log(Vue)
 new Vue({
   router,
   render: h => h(App)

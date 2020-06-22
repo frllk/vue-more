@@ -1,10 +1,22 @@
 <template>
-  <div class=''>我是标题组件</div>
+  <h3 class='ui header'>
+    <slot>标题</slot>
+    <div class="sub header">
+      <slot name="sub"></slot>
+    </div>
+  </h3>
 </template>
 
 <script>
 export default {
-  name: 'MyHeadline'
+  name: 'MyHeadline',
+  props: {
+    level: {
+      type: Number,
+      required: false,
+      default: 3
+    }
+  }
 }
 </script>
 
