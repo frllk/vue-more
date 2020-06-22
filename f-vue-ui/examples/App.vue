@@ -4,7 +4,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/button">按钮</router-link> |
       <router-link to="/divider">分隔条</router-link> |
-      <router-link to="/slider">轮播图</router-link>
+      <router-link to="/slider">轮播图</router-link> |
+      <router-link to="/headline">标题组件</router-link>
     </div>
     <router-view/>
   </div>

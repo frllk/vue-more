@@ -27,6 +27,11 @@ const routes = [
     path: '/slider',
     name: 'Slider',
     component: () => import('../views/SliderTest.vue')
+  },
+  {
+    path: '/headline',
+    name: 'Headline',
+    component: () => import('../views/HeadlineTest.vue')
   }
 ]
 
