@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <p v-for="item in list">{{item}}</p>
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            list: ['html', 'css', 'js']
+        }
+    })
+    console.log(vm.$options.render)
+</script>
+</body>
+</html>

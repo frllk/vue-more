@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">{{msg}}</div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    new Vue({
+      render (h) {
+        // h啥一个函数，在vue的内部可以通过this.$createElement来获取它
+        // 这个函数的作用啥创建虚拟dom
+        // 整体render就是调用h函数，产生虚拟dom并返回
+        console.log(h)
+        console.log(this.$createElement === h)
+        const vnode = h('div', 'render')
+        console.log(vnode)
+        return vnode
+      }
+    }).$mount('#app')
+    // 可以通过vm.$options.render来查看当前vue实例的render
+    // console.log(vm, vm.$options.render)
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <p v-for="item in list">{{item}}</p>
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    var vm = new Vue({
+      data: {
+        level: 1,
+        msg: 'vue'
+      },
+      render (h) {
+        // render会执行多次
+        // 只要数据项的变化，他就会执行，重新生成虚拟dom
+        const vnode = h('h' + this.level, this.msg)
+        console.log(vnode)
+        return vnode
+      }
+    }).$mount('#app')
+    console.log(vm.$options.render)
+</script>
+</body>
+</html>

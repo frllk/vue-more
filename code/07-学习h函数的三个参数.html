@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <p v-for="item in list">{{item}}</p>
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script type="text/javascript">
+    var vm = new Vue({
+        render (h) {
+          // h(参数1，参数2，参数3)
+          // 参数1： String|Object|Function
+          //           是一个html标签，或者啥一个组件，或者啥一个函数
+          // string
+          const vnode = h(
+            'h5', 
+            {
+              attrs: {
+                id: 'abc'
+              },
+              style: { color: 'red' }
+            },
+            // 参数3：
+            // 字符串，则它会编程标签的内容 
+            // 数组，表示子元素
+            // '标题'
+            ['我是h5', h('span', 'abc'), h('i', 'abc')]
+           )
+          // 一个组件
+          // const vnode = h({
+          //   name: 'com',
+          //   data () { return { msg: 'vue' } },
+          //   template: `<div>我是一个组件{{msg}}</div>`
+          // })
+          // function
+          // const eleFun = function () {
+          //   return {
+          //     template: `<div>hello, vue! </div>`
+          //   }
+          // }
+          // const vnode = h(eleFun())
+
+          console.log(vnode)
+          return vnode
+        }
+    }).$mount('#app')
+    console.log(vm.$options.render)
+</script>
+</body>
+</html>
