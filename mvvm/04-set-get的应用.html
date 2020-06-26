@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    vue
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        a: 1,
+        b: 2
+      }
+    })
+    console.log(vm)
+  </script>
+  <script>
+    var obj = {
+      // msg: 'vue'
+    }
+    // 要求是：
+    // 当运行 obj.msg = '新值'时，div中的内容也要跟着变
+    var _msg = 'vue'
+    Object.defineProperty(obj, 'msg', {
+      set (val) {
+        console.log('有人修改了msg的值，修改为', val)
+        document.getElementById('app').innerHTML = val
+        _msg = val
+      },
+      get () {
+        return _msg
+      }
+    })
+  </script>
+</body>
+
+</html>

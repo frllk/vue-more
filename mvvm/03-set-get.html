@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>介绍Object.defineProperty的set、get</h1>
+  <!-- 
+    Object.defineProperty(obj, prop, descriptor)
+    参数：
+    - obj:要操作的对象。
+    - prop:要定义或修改的属性的名称。
+    - descriptor:对参数2的描述，也叫属性描述符，它是一个具有固定属性名的字面量对象。
+    {
+      get:function(){}, // 重点  一个给属性提供 get的方法，如果没有 getter 则为 `undefined`。当访问该属性时，该方法会被执行
+      set:function(){}  // 重点 一个给属性提供 set 的方法，如果没有 setter 则为 `undefined`。当属性值修改时，触发执行该方法。该方法将接受唯一参数，即该属性新的参数值。
+    }
+    （1）writable、value和get、set不能同时使用
+    （2）用作拦截器。当你访问或者设置这个属性时，能够被感知到
+          当访问对象的属性时，会去执行get函数，并把其返回值作为结果
+          当设置对象的属性时，会去执行set函数，并把赋值操作中的值传入set函数
+    （3）它自己就不能去保存数据了，需要一个额外的变量才能保存数据
+   -->
+  <script>
+    var obj = { b:2 }
+    var _a;
+    Object.defineProperty(obj, 'a', {
+      get:function(){
+        console.log('a属性被访问了')
+        return _a ?? Math.random()
+      }, // 重点  一个给属性提供 get的方法，如果没有 getter 则为 `undefined`。当访问该属性时，该方法会被执行
+      set:function(val){
+        console.log('有人给a赋了值', val)
+        _a = val
+      }  // 重点 一个给属性提供 set 的方法，如果没有 setter 则为 `undefined`。当属性值修改时，触发执行该方法。该方法将接受唯一参数，即该属性新的参数值。
+    })
+    console.log(obj)
+  </script>
+</body>
+
+</html>
