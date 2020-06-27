@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>介绍Object.defineProperty的作用</h1>
+  <!-- 
+    作用：
+    更加精细地来定义对象的属性。
+    之前定义属性有：
+    1> obj.新属性名 = 值
+    2> Object.defineProperty(对象， 属性名， 说明)
+   -->
+  <script>
+    // var obj = { a: 1 }
+    // console.log(Object.getOwnPropertyDescriptor(obj, "a"))
+    // ===
+    var obj = {}
+    Object.defineProperty(obj, "a", {
+      configurable: true,
+      enumerable: true,
+      value: 1,
+      writable: true
+    })
+    // 更加精细化来定义a  --- 修改a的定义    
+    // 精细描述对象（可以新增属性，也可以去修改已有属性）
+    Object.defineProperty(obj, "a", {
+      get () {
+        console.log('有人获取')
+        return 1000
+      }
+    })
+    console.log(obj.a)
+  </script>
+</body>
+
+</html>
