@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 构造器
+    function EventCenter () {
+            this.guanjia = {
+                // 'a': [],
+                // 'b': []
+                // 'haqie': [xiaolong],
+            }
+        }
+        // 添加观察者fn，它观察eventName事件
+        // 理解：给雷哥加一个fans,找到数组，添加一个函数
+        EventCenter.prototype.$on = function(eventName, fn){
+          // 如果在事件中心已经注册过
+          if(this.guanjia[eventName])
+            this.guanjia[eventName].push(fn)
+          else 
+            this.guanjia[eventName] = [ fn ]
+        }
+
+        // 发布事件，执行相应的观察者函数
+        EventCenter.prototype.$emit = function(eventName){
+            console.log( this.guanjia[eventName] )
+            // 如果在事件中心已经注册过
+            if (this.guanjia[eventName]) {
+              this.guanjia[eventName].forEach(fn => {
+                  fn()
+              })
+            }
+        }
+
+        // app 是构造器EventCenter的一个实例
+        const app = new EventCenter()
+        // 添加一个观察者，对事件a感兴趣
+        // 这个箭头函数就是一个观察者，它对事件a感兴趣
+        // 当事件a发生时，它就会执行
+        app.$on('a',()=>{
+            console.log('a1')
+        })
+        // 添加一个观察者，对事件a感兴趣
+        app.$on('a',()=>{
+            console.log('a2')
+        })
+
+        // 添加一个观察者，对事件a感兴趣
+        app.$on('a',()=>{
+            console.log('a3')
+        })
+
+        // 添加一个观察者，对事件a感兴趣
+        app.$on('b',()=>{
+            console.log('b')
+        })
+
+        // 添加一个观察者，对事件c感兴趣
+        // bug===Cannot read property 'push' of undefined
+        app.$on('c',()=>{
+            console.log('c')
+        })
+
+        // 发布事件,事件名是a,所有的对a事件感兴趣的观察者都会执行
+        app.$emit("a"); 
+        // bug:==== Cannot read property 'forEach' of undefined
+        app.$emit("d"); 
+  </script>
+</body>
+</html>
