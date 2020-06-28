@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <!-- MVVM：V -->
+  <div id="app">
+    <h2 v-html="salary"></h2>
+    <input type="text" v-model="salary">
+    <p v-html="salary"></p>
+  </div>
+  <script type="text/javascript">
+  // ==========================观察者模式=========================
+  // 构造器
+  function EventCenter () {
+          this.guanjia = {
+              // 'a': [],
+              // 'b': []
+              // 'haqie': [xiaolong],
+          }
+  }
+  // 添加观察者fn，它观察eventName事件
+  // 理解：给雷哥加一个fans,找到数组，添加一个函数
+  EventCenter.prototype.$on = function(eventName, fn){
+    // 如果在事件中心已经注册过
+    if(this.guanjia[eventName])
+      this.guanjia[eventName].push(fn)
+    else 
+      this.guanjia[eventName] = [ fn ]
+  }
+
+  // 发布事件，执行相应的观察者函数
+  EventCenter.prototype.$emit = function(eventName){
+      console.log( this.guanjia[eventName] )
+      // 如果在事件中心已经注册过
+      if (this.guanjia[eventName]) {
+        this.guanjia[eventName].forEach(fn => {
+            fn()
+        })
+      }
+  }
+
+
+  let ec = new EventCenter()
+
+// ==========================观察者模式=========================
+
+
+  // 目标：模板编译并初始显示内容
+  // || 
+  // 目标：当属性值变化时，视图也要变
+  function MVVM (options) {
+    // 你的代码
+    let { el, data } = options
+    console.log(el, data)
+    // 在构造器的内部this指的是实例对象
+    // 把data中所有可枚举的属性通过Object.defineProperty添加到this上
+    for (let key in data) {
+      console.log(key)
+      Object.defineProperty(this, key, {
+        get () {
+          console.log('有人访问了', key, '属性')
+          return data[key]
+        },
+        set (newVal) {
+          if (newVal != data[key]) {
+            console.log('有人设置了', key, '属性', newVal)
+            data[key] = newVal
+
+            // 通过观察者模式发布事件
+            ec.$emit(key)
+          }
+        }
+      })
+    }
+
+    // 循环模板中的所有的子节点
+    // 获取子节点rootDom.children，它是一个伪数组，如果想用forEach循环
+    // 先把它转成数组
+    let rootDom = document.querySelector(el)
+    console.log(rootDom.children, Array.isArray(rootDom))
+    Array.from(rootDom.children).forEach(node => {
+      // 对每个节点，分析是否有v-html，v-model属性,直接使用系统api：hasAttribute
+      // console.log(node, node.hasAttribute('v-html'))
+      if (node.hasAttribute('v-html')) {
+        // 1、显示初始值
+
+        // 把v-html的属性值取出来
+        // console.log('取出v-html的值', node.getAttribute('v-html'))
+        let attrVal = node.getAttribute('v-html')
+        // 把一个名为attrVal的属性值从data中取出来，显示在这个dom节点上
+        node.innerHTML = this[attrVal]
+        // 2、当数据变化时，更新内容。监听名为attrVal的事件，在回调函数中，更相信内容
+        ec.$on(attrVal, () => {
+          console.log(attrVal, '值变化了，所以v-html也要更新了')
+          node.innerHTML = this[attrVal]
+        })
+      }
+      if (node.hasAttribute('v-model')) {
+        // 1、显示初始值
+        // 把v-model的属性值取出来
+        let attrVal = node.getAttribute('v-model')
+        // 把一个名为attrVal的属性值从data中取出来，显示在这个dom节点上
+        // 当前是input
+        node.value = this[attrVal]
+        // 2、当数据变化时，更新内容。监听名为attrVal的事件，在回调函数中，更相信内容
+        ec.$on(attrVal, () => {
+          node.value = this[attrVal]
+        })
+      }
+    })
+  }
+
+    var data = {
+        salary:15000
+    }
+    // MVVM：VM
+    // 目标：自己写代码，实现类似的Vue功能
+    var vm = new MVVM({
+        el:"#app",
+        data
+    })
+  </script>
+</body>
+</html>
