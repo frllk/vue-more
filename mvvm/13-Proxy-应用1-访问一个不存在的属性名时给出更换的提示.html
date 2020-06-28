@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+<script>
+  var obj = {
+    a:1,
+    b:2
+  }
+  // 能否定义一个对象，当我们访问一个不存在的属性名时给出更换的提示，而不是简单返回的undefined
+  var obj1 = new Proxy(obj, {
+    get: function (target, prop) {
+      console.log(target, prop)
+      // 如果prop 在target中存在，则直接返回值，否则，给出提示
+      if (prop in target) {
+        return target[prop]
+      } else {
+        console.error('请把你的研究放大一点看，你要的属性', prop, '在对象', target, '中不存在')
+      }
+    },
+    // 当你给属性赋值时，会进入到set中来
+    set: function (target, prop, newVal) {
+      console.log(target, prop, newVal)
+      if (newVal > 80) {
+        newVal = 80
+      }
+      target[prop] = newVal
+    }
+  })
+  // console.log(obj1.a)
+  // console.log(obj1.b)
+  // console.log(obj1.arr)
+  obj1.a = 100
+</script>
+</body>
+</html>
