@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <!-- MVVM：V -->
+  <div id="app">
+    <h2 v-html="salary"></h2>
+    <input type="text" v-model="salary">
+    <p v-html="salary"></p>
+  </div>
+  <script type="text/javascript">
+  function MVVM () {
+    // 你的代码
+    // ......
+  }
+
+    var data = {
+        salary:15000
+    }
+    // MVVM：VM
+    // 目标：自己写代码，实现类似的Vue功能
+    var vm = new Vue({
+        el:"#app",
+        data
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <!-- MVVM：V -->
+  <div id="app">
+    <h2 v-html="salary"></h2>
+    <input type="text" v-model="salary">
+    <p v-html="salary"></p>
+  </div>
+  <script type="text/javascript">
+//   目标：
+// - 写出构造器的基本架子，完成参数传递与获取。这里的参数只有两个:el,data
+// - 实现数据拦截：
+// - 在代码外部，让MVVM实例可以操作data选项中的属性。
+// - 在代码内部，能通过this.属性名 的方式去操作data选项中的属性。
+
+  function MVVM (options) {
+    // 你的代码
+    let { el, data } = options
+    console.log(el, data)
+    // 在构造器的内部this指的是实例对象
+    // 把data中所有可枚举的属性通过Object.defineProperty添加到this上
+    for (let key in data) {
+      console.log(key)
+      Object.defineProperty(this, key, {
+        get () {
+          console.log('有人访问了', key, '属性')
+          return data[key]
+        },
+        set (newVal) {
+          console.log('有人设置了', key, '属性', newVal)
+          data[key] = newVal
+        }
+      })
+    }
+  }
+
+    var data = {
+        salary:15000
+    }
+    // MVVM：VM
+    // 目标：自己写代码，实现类似的Vue功能
+    var vm = new MVVM({
+        el:"#app",
+        data
+    })
+    console.log(vm.salary)
+    vm.salary = 20000
+  </script>
+</body>
+</html>
