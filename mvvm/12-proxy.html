@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <h1>学习Proxy的使用</h1>
+  <h2>作用：在源对象的基础上，产生一个代理对象</h2>
+  <!-- 格式：
+  var 代理对象 = new Proxy(原对象， {
+    操作1： 函数1，
+    操作2： 函数2
+  })
+  -->
+<script>
+  var superStar = {
+    name: '小罗', age: 30, aihao: '运动', techang: '时间管理'
+  }
+  var xiaozhao = new Proxy(superStar, {
+    // 获取属性
+    // 对于xiaozhao，只是获取对象的属性，就会进入get函数
+    // target: 代理原对象
+    // prop： 当前要访问的属性
+    get: function (target, prop) {
+      console.log(target, prop)
+      if (prop === 'age') {
+        return 18
+      } else if (prop === 'techang') {
+        return '唱歌、跳舞、rap'
+      } else {
+        return target[prop] 
+      }
+    }
+  })
+  
+  // 访问 小赵的姓名
+  console.log(xiaozhao.name)
+  console.log(xiaozhao.age)
+  console.log(xiaozhao.techang)
+</script>
+</body>
+</html>
