@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+  // 在组件之间公用代码
+  var mixin = {
+    created: function () { console.log(1) },
+    methods: {
+      f2 (val) {
+        return val / 2
+      }
+    }
+  }
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      a: 1
+    },
+    methods: {
+      f1 () {
+        this.a = 100
+        this.a = this.f2(50)
+        console.log(this.a)
+      }
+    },
+    created: function () { console.log(2) },
+    mixins: [mixin]
+  })
+  const vm1 = new Vue({
+    mixins: [mixin]
+  })
+  
+</script>
+</body>
+</html> 
